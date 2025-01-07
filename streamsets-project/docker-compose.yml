@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  streamsets:
+    image: streamsets/datacollector:3.18.1
+    container_name: streamsets
+    platform: linux/amd64
+    ports:
+      - "18630:18630"
+    environment:
+      - SDC_CONF_HTTP_PORT=18630
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: streamsets
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:
+
+networks:
+  default:
+    driver: bridge
