@@ -10,6 +10,8 @@ services:
       POSTGRES_DB: streamsets
     ports:
       - "5432:5432"
+    networks:
+      - mssql-network
     volumes:
       - postgres_data:/var/lib/postgresql/data
 volumes:

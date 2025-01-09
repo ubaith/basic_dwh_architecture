@@ -2,10 +2,10 @@
   "pipelineConfig" : {
     "schemaVersion" : 6,
     "version" : 19,
-    "pipelineId" : "loadcustod461681e-2681-4a7d-aa2a-4cb4bcea5d65",
+    "pipelineId" : "loadcustoc4d62fc7-1c8f-4cd0-97ed-1cde2778b112",
     "title" : "load_customer_table",
     "description" : "",
-    "uuid" : "3f0b4a19-087c-4c30-8e77-85a0020ff769",
+    "uuid" : "7669e43e-0499-4364-9297-250caa17f700",
     "configuration" : [ {
       "name" : "executionMode",
       "value" : "STANDALONE"
@@ -518,23 +518,139 @@
       },
       "inputLanes" : [ ],
       "outputLanes" : [ "JDBCQueryConsumer_01OutputLane17363626754520" ],
-      "eventLanes" : [ ],
+      "eventLanes" : [ "JDBCQueryConsumer_01_EventLane" ],
       "services" : [ ]
     }, {
-      "instanceName" : "Trash_01",
-      "library" : "streamsets-datacollector-basic-lib",
-      "stageName" : "com_streamsets_pipeline_stage_destination_devnull_NullDTarget",
-      "stageVersion" : "1",
-      "configuration" : [ ],
+      "instanceName" : "JDBCProducer_01",
+      "library" : "streamsets-datacollector-jdbc-lib",
+      "stageName" : "com_streamsets_pipeline_stage_destination_jdbc_JdbcDTarget",
+      "stageVersion" : "10",
+      "configuration" : [ {
+        "name" : "schema",
+        "value" : "public"
+      }, {
+        "name" : "tableNameTemplate",
+        "value" : "customers"
+      }, {
+        "name" : "columnNames",
+        "value" : [ ]
+      }, {
+        "name" : "encloseTableName",
+        "value" : false
+      }, {
+        "name" : "changeLogFormat",
+        "value" : "NONE"
+      }, {
+        "name" : "defaultOperation",
+        "value" : "INSERT"
+      }, {
+        "name" : "unsupportedAction",
+        "value" : "DISCARD"
+      }, {
+        "name" : "useMultiRowInsert",
+        "value" : false
+      }, {
+        "name" : "maxPrepStmtParameters",
+        "value" : -1
+      }, {
+        "name" : "rollbackOnError",
+        "value" : false
+      }, {
+        "name" : "hikariConfigBean.connectionString",
+        "value" : "jdbc:postgresql://172.20.0.4:5432/streamsets"
+      }, {
+        "name" : "hikariConfigBean.useCredentials",
+        "value" : true
+      }, {
+        "name" : "hikariConfigBean.username",
+        "value" : ""
+      }, {
+        "name" : "hikariConfigBean.password",
+        "value" : ""
+      }, {
+        "name" : "hikariConfigBean.driverProperties",
+        "value" : [ ]
+      }, {
+        "name" : "hikariConfigBean.driverClassName",
+        "value" : null
+      }, {
+        "name" : "hikariConfigBean.connectionTestQuery",
+        "value" : null
+      }, {
+        "name" : "hikariConfigBean.maximumPoolSize",
+        "value" : 1
+      }, {
+        "name" : "hikariConfigBean.minIdle",
+        "value" : 1
+      }, {
+        "name" : "hikariConfigBean.connectionTimeout",
+        "value" : "${30 * SECONDS}"
+      }, {
+        "name" : "hikariConfigBean.idleTimeout",
+        "value" : "${10 * MINUTES}"
+      }, {
+        "name" : "hikariConfigBean.maxLifetime",
+        "value" : "${30 * MINUTES}"
+      }, {
+        "name" : "hikariConfigBean.initialQuery",
+        "value" : null
+      }, {
+        "name" : "hikariConfigBean.transactionIsolation",
+        "value" : "DEFAULT"
+      }, {
+        "name" : "customDataSqlStateCodes",
+        "value" : [ "" ]
+      }, {
+        "name" : "stageOnRecordError",
+        "value" : "TO_ERROR"
+      }, {
+        "name" : "stageRequiredFields",
+        "value" : [ ]
+      }, {
+        "name" : "stageRecordPreconditions",
+        "value" : [ ]
+      } ],
       "uiInfo" : {
         "yPos" : 50,
         "stageType" : "TARGET",
-        "icon" : "trash.png",
+        "icon" : "rdbms.png",
         "description" : "",
-        "label" : "Trash 1",
-        "xPos" : 280
+        "label" : "JDBC Producer 1",
+        "xPos" : 280,
+        "displayMode" : "BASIC"
       },
       "inputLanes" : [ "JDBCQueryConsumer_01OutputLane17363626754520" ],
+      "outputLanes" : [ ],
+      "eventLanes" : [ ],
+      "services" : [ ]
+    }, {
+      "instanceName" : "PipelineFinisherExecutor_01",
+      "library" : "streamsets-datacollector-basic-lib",
+      "stageName" : "com_streamsets_pipeline_stage_executor_finishpipeline_PipelineFinisherDExecutor",
+      "stageVersion" : "1",
+      "configuration" : [ {
+        "name" : "config.resetOffset",
+        "value" : false
+      }, {
+        "name" : "stageOnRecordError",
+        "value" : "TO_ERROR"
+      }, {
+        "name" : "stageRequiredFields",
+        "value" : [ ]
+      }, {
+        "name" : "stageRecordPreconditions",
+        "value" : [ ]
+      } ],
+      "uiInfo" : {
+        "yPos" : 200,
+        "stageType" : "EXECUTOR",
+        "icon" : "finisher.png",
+        "description" : "",
+        "label" : "Pipeline Finisher Executor 1",
+        "xPos" : 280,
+        "displayMode" : "ADVANCED"
+      },
+      "inputLanes" : [ "JDBCQueryConsumer_01_EventLane" ],
       "outputLanes" : [ ],
       "eventLanes" : [ ],
       "services" : [ ]
@@ -555,22 +671,22 @@
       "services" : [ ]
     },
     "info" : {
-      "pipelineId" : "loadcustod461681e-2681-4a7d-aa2a-4cb4bcea5d65",
+      "pipelineId" : "loadcustoc4d62fc7-1c8f-4cd0-97ed-1cde2778b112",
       "title" : "load_customer_table",
       "description" : "",
-      "created" : 1736362340051,
-      "lastModified" : 1736362807072,
+      "created" : 1736363437804,
+      "lastModified" : 1736450327449,
       "creator" : "admin",
       "lastModifier" : "admin",
       "lastRev" : "0",
-      "uuid" : "3f0b4a19-087c-4c30-8e77-85a0020ff769",
+      "uuid" : "7669e43e-0499-4364-9297-250caa17f700",
       "valid" : true,
       "metadata" : {
         "labels" : [ ]
       },
-      "name" : "loadcustod461681e-2681-4a7d-aa2a-4cb4bcea5d65",
+      "name" : "loadcustoc4d62fc7-1c8f-4cd0-97ed-1cde2778b112",
       "sdcVersion" : "3.18.1",
-      "sdcId" : "20f5d9b2-cdf1-11ef-9fdc-b1cfa3eb57e0"
+      "sdcId" : "14cdf1a4-cdf4-11ef-8a09-55b82ba22609"
     },
     "metadata" : {
       "labels" : [ ]
@@ -951,7 +1067,7 @@
     } ],
     "dataRuleDefinitions" : [ ],
     "driftRuleDefinitions" : [ ],
-    "uuid" : "fa236311-aea7-4fc9-b6b4-24671f79712d",
+    "uuid" : "dc2354e6-5d78-4023-bdef-ad93d9725510",
     "configuration" : [ {
       "name" : "emailIDs",
       "value" : [ ]
