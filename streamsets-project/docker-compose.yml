@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   streamsets:
-    image: streamsets/datacollector:3.18.1
+    image: streamsets/datacollector:4.0.1
     container_name: streamsets
     platform: linux/amd64
     ports:
@@ -14,6 +14,7 @@ services:
     volumes:
       - ./streamsets_data:/data
       - ./streamsets_logs:/logs
+      - ./streamsets_external_libraries:/opt/streamsets-datacollector/external-libraries
 volumes:
   streamsets_data:
   streamsets_logs:
