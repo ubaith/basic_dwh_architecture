@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  dwh:
+    build: .  # Build from the Dockerfile in the current directory
+    container_name: dwh
+    tty: true
+    stdin_open: true
+    ports:
+      - "18630:18630"
+    volumes:
+      - ./streamsets-datacollector-common-3.22.3.tar:/streamsets-datacollector-common-3.22.3.tar
+    # Optional: If you want to run a command after the container starts
+    #command: ["cat", "/path/in/container/my_file_in_container.txt"]
