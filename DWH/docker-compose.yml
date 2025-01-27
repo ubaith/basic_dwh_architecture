@@ -11,6 +11,7 @@ services:
       - mssql-network
     volumes:
       - ./streamsets-datacollector-common-3.22.3.tar:/streamsets-datacollector-common-3.22.3.tar
+      - ./streamsets_external_libraries:/opt/streamsets-datacollector/external-libraries
     # Optional: If you want to run a command after the container starts
     #command: ["cat", "/path/in/container/my_file_in_container.txt"]
 
